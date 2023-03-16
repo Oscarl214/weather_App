@@ -19,18 +19,18 @@
   <body class="flex-column min-100-vh">
     
     <header class="text-bg-primary text-center">
-      <h1>
-        <i class="fa-sharp fa-solid fa-sun"></i>Weather App
+      <h1 class>
+        <i class="fa-sharp fa-solid fa-sun"></i><span class="header">Weather App</span><i class="fa-sharp fa-solid fa-cloud"></i>
       </h1>
     </header>
     <div class="row">
       <div class="col-sm-4">
-        <form>
+        <form id="user-form">
           <div class="mb-3 border-bottom border-dark">
             <label for="exampleInputEmail1" class="form-label"><span id="city">Search for a City:</span></label>
             <input type="text" class="form-control" id="userCity" placeholder="Ex:Dallas">
           <br>
-          <button type="submit" class="btn btn-primary">Search</button>
+          <button type="submit" class="btn btn-primary" id="userSearchbtn">Search</button>
         </div>
         </form>
         <div class="container">

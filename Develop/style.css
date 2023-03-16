@@ -1,4 +1,19 @@
-#city{
-    font-weight: bold;
-    font-size: 30px;
+#city {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+body {
+  background-image: linear-gradient(
+    to right,
+    #2690e1,
+    #00aff6,
+    #00c9e2,
+    #00dea9,
+    #12eb54
+  );
+}
+
+.header {
+  margin: 2rem;
 }
