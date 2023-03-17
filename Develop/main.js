@@ -3,10 +3,10 @@ let searches = $(".pastSearches"); //Div where old searches will be displayed th
 let userFormEl = $("#user-form"); //text input element
 let cityInputEl = $("#userCity"); //users search
 let userSearchBtn = $("#userSearchBtn"); //submit button
-const cityName = $("#city"); //grabs my h1 where I want the city that is search up to display
-const cityTemp = $("#temp"); //grabs my span element where I want the temp data to display
-const cityWind = $("#wind"); //grabs my span element where I want the wind data to display
-const cityHumid = $("#humid"); //grabs my span element where I want the humidity to display
+
+let todaysDate= dayjs();
+
+
 
 var apiKey = "48774715b5f5fb8a452c6ba72a2e6d98"; //my API key
 
@@ -32,13 +32,24 @@ function handleFormSubmit(event) {
     })
     .then(function (data) {
       console.log(data);
-
+      const cityName = $("#city");  //grabs my h1 where I want the city that is search up to display
+      const cityDate=$("#date")
       const cityTemp = $("#temp"); //Got my temp to show on designated temp span element
-      cityTemp.text(data.main.temp + "°F");
-
-      //TODO: CALL MY H1 TITLE AND SET IT TO CITY DATA
-      //CALL MY WIND ELEMENT AND SET IT TO WIND DATA
-      //CALL MY HUMIDITY ELEMENT AND SET IT TO HUMID DATA
+      const cityWind = $("#wind"); //grabs my span element where I want the wind data to display
+      const cityHumid = $("#humid"); //grabs my span element where I want the humidity to display
+      const weatherIcon=$("#icon"); // grab my span element where I want the Icon to display
+      var iconCode= data.weather[0].icon; //specific call to the weather icon for perpective searched city
+      var iconURL= 'http://openweathermap.org/img/wn/' +  iconCode+ '.png'; // Url needed to display icon 
+      cityName.text(data.name); //setting the data that contains name to my name element
+      cityDate.text(todaysDate); //setting the dayjs variable to my date element
+      weatherIcon.attr('src', iconURL); // setting the icon element to my icon element 
+      cityTemp.text(" "+data.main.temp + "°F"); //seting the data that contains the temp to my temp element
+      cityWind.text(" "+data.wind.speed + "MPH"); //seting the data that contains the speed to my wind element
+      cityHumid.text(" "+data.main.humidity+ "%"); //seting the data that contains the humidity to my humidity element
+      
+      //TODO: 
+      //FIGURE OUT HOW TO DYNAMICALLY CREATE WEEKLY FORECAST WEATHER CARDS M-F
+      //FIGURE OUT HOW TO STORE PAST SEARCHES
     });
 
   // print to the page
