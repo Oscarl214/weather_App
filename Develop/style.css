@@ -4,14 +4,7 @@
 }
 
 body {
-  background-image: linear-gradient(
-    to right,
-    #2690e1,
-    #00aff6,
-    #00c9e2,
-    #00dea9,
-    #12eb54
-  );
+    background: linear-gradient(90deg, hsla(348, 88%, 66%, 1) 0%, hsla(36, 89%, 68%, 1) 100%);
 }
 
 .header {

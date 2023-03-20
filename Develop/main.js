@@ -46,29 +46,73 @@ function handleFormSubmit(event) {
       cityTemp.text(" "+data.main.temp + "°F"); //seting the data that contains the temp to my temp element
       cityWind.text(" "+data.wind.speed + "MPH"); //seting the data that contains the speed to my wind element
       cityHumid.text(" "+data.main.humidity+ "%"); //seting the data that contains the humidity to my humidity element
-      
-      //TODO: 
-      //FIGURE OUT HOW TO DYNAMICALLY CREATE WEEKLY FORECAST WEATHER CARDS M-F
-      //FIGURE OUT HOW TO STORE PAST SEARCHES
+   
+       // Get the current list of searches from local storage, or create a new empty array if none exists
+
     });
+ 
+    //MY NEW URL that is dedicated to fetch the forecast weather for the upcoming days for a city
+    var forecastURL =
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
+    cityItem +
+    "&appid=" +
+    apiKey +
+    "&units=imperial";
+ 
+fetch(forecastURL,{
+    cache: "reload",
+})
+.then (function (response) {
+      return response.json();
+    }).then(function (data) {
+        console.log(data)
+        const daysArray=data.list; //variable that contains the list array within the data that is fetched
 
-  // print to the page
-  // shoppingListEl.append("<li>" + shoppingItem + "</li>");
+        //FOR LOOP THAT LOOPS THROUGH ARRAY
+        for(i=0;i <daysArray.length; i++){
+            const date = todaysDate.add(i + 1, 'day').format('M/DD'); //here im increamenting the date by one day each time it loops and im using the dayjs variable to do so
+            const temp = daysArray[i].main.temp; // setting the temp info to the temp variable which will set it to every day
+            const wind=daysArray[i].wind.speed;// same thing happening with the wind data
+            const humidity = daysArray[i].main.humidity; //same thing happening with the spped data
+            var iconCode= daysArray[i].weather[0].icon; //specific call to the weather icon for perpective searched city
+            var iconURL= 'http://openweathermap.org/img/wn/' +  iconCode + '.png'; // Url needed to display icon
+            //CREATE MY ELEMENTS TO APPEND TO MY CARDS
+            const dateEl = $("<h5>").text(date);  //here I create a h5 tag and I set the date variable which contaisn the dates for each day of the week
+            const iconEl = $("<img>").attr("src", iconURL); //Here i create my img taga dn set the attr of a source that is my icon URL
+            const tempEl = $("<p>").html(`Temp: ${temp}&deg;F`); //here i create a p tag with the temp data 
+            const windEl= $("<p>").html(`Wind: ${wind} MPH`) //create another p tag with the wind data
+            const humidityEl = $("<p>").html(`Humidity: ${humidity}%`) //create one more p tage with my humidity data
 
-  // clear the form input element
+            //CLEAR MY CARD CONTENT
+            $(`#day-${i + 1}`).html('');
+            //APPENDING TO MY CARD
+            $(`#day-${i + 1}`).append(dateEl).append(tempEl).append(iconEl).append(windEl).append(humidityEl);
+
+            let cards=$("#cards");
+            cards.removeAttr("hidden");
+            let currentDay=$("#currentDay");
+            currentDay.removeAttr("hidden");
+        } 
+    })
+    // localStorages();
+  // clear the form input element (Users search)
   cityInputEl.val("");
+  
 }
 
 // Create a submit event listener on the form element
 userFormEl.on("submit", handleFormSubmit);
 
+
+
+  //TODO: 
+      //FIGURE OUT HOW TO STORE PAST SEARCHES to local Storage and how to call them
+
+
 //Questions
-//1. should everything be on one function or different function expressions I call on as I need to?
-//2. I know I have to add an event listener/event handler to the search(submit button) on my form
-//3. Then take the inputted value of the user so that I can use that specific value to fetch whatever city they search for
-//4. ^^^ Should that be its own function expression?
-//5. Then create a function that displays the specific data I pulled from the fetch function and apply it to the text content of its designated span elements
-//Ex: Temp, Humidity, Wind
+//1. How Do I set the latest user search to local storage and how do 
+// 1. how do I get a new button to formulate with every new search that contains the latest city search ran??
+//2. Once I do that can I just attached the event handler created taht formulates the current and forecast cards to each button created so that it can replace the info accordingly? 
 
 //create everything in one function
 //I can create my elements and cards for my forecast in my last then call in my fetch
