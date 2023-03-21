@@ -122,7 +122,9 @@ let storedSearches = function () {
   for (var i = searches.length - 1; i >= 0; i--) {
     var btn = document.createElement("button");
     btn.setAttribute("type", "button");
+    btn.textContent = searches[i]; 
     let pastSearchesContainer = $("#pastSearches");
+    
     pastSearchesContainer.append(btn);
   }
   //where should this function be called from???
