@@ -8,11 +8,7 @@ let todaysDate = dayjs();
 
 var apiKey = "48774715b5f5fb8a452c6ba72a2e6d98"; //my API key
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  var cityItem = cityInputEl.val();
-
+function handleFormSubmit(cityItem) {
   var attempt2Url =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityItem +
@@ -114,17 +110,22 @@ let storedSearches = function () {
 
   var searches = JSON.parse(localStorage.getItem("city"));
   if (cityItem !== "") {
-    searches.push(cityItem);
-    // Save the updated list of searches to local storage
-    localStorage.setItem("city", JSON.stringify(searches));
+    if (!searches.includes(cityItem)) {
+      searches.push(cityItem);
+      // Save the updated list of searches to local storage
+      localStorage.setItem("city", JSON.stringify(searches));
+    }
   }
 
-  for (var i = searches.length - 1; i >= 0; i--) {
-    var btn = document.createElement("button");
-    btn.setAttribute("type", "button");
-    btn.textContent = searches[i]; 
-    let pastSearchesContainer = $("#pastSearches");
-    
+  let pastSearchesContainer = $("#pastSearches");
+  pastSearchesContainer.html("");
+  for (let i = searches.length - 1; i >= 0; i--) {
+    let btn = $("<button></button>");
+    btn.attr("type", "button");
+    btn.text(searches[i]);
+    btn.on("click", function () {
+      handleFormSubmit(searches[i]);
+    });
     pastSearchesContainer.append(btn);
   }
   //where should this function be called from???
@@ -133,7 +134,11 @@ let storedSearches = function () {
 storedSearches();
 
 // Create a submit event listener on the form element
-userFormEl.on("submit", handleFormSubmit);
+userFormEl.on("submit", function (event) {
+  event.preventDefault();
+  var cityItem = cityInputEl.val();
+  handleFormSubmit(cityItem);
+});
 
 //TODO:
 //FIGURE OUT how to call most recent stored city from local storage and how to display them on to a button
