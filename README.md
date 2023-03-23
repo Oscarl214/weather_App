@@ -4,9 +4,9 @@ Simple weather application that allows a user to search for a city of their choi
 
 ## Features
 
-Provides current and future forecast for a given city using data from OpenWeather API
+Provides current and future forecast for a given city using data from OpenWeather API. 
 
-Search history is saved locally to display a dynamically updated list of recent cities
+Search history is saved locally to display a dynamically updated list of recent cities.
 
 ## Reflection
 
