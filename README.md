@@ -1,4 +1,4 @@
-# Work Day Scheduler
+# Weather App
 
 Simple weather application that allows a user to search for a city of their choice to be able to receive the current weather and a five day forecast. 
 
