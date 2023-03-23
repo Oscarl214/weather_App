@@ -21,6 +21,10 @@ BootStrap, DayJS, OpenWeatherAPI
 
 
 
+https://user-images.githubusercontent.com/104389845/227340433-4e800638-3be0-41bf-ab9d-2a7822e355b0.mp4
+
+
+
 ## Deployed Link
 
 https://oscarl214.github.io/weather_App/
