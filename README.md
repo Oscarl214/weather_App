@@ -4,13 +4,13 @@ Simple weather application that allows a user to search for a city of their choi
 
 ## Features
 
-Provides current and future forecasts for a given city using data from OpenWeather API
+Provides current and future forecast for a given city using data from OpenWeather API
 
 Search history is saved locally to display a dynamically updated list of recent cities
 
 ## Reflection
 
-Fetching from the open weather API allowed me to undersdtand the build in fetch method in js. 
+Fetching from the open weather API allowed me to understand the build in fetch method in js. 
 
 ## Resources Used
 
