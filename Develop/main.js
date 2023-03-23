@@ -121,6 +121,7 @@ let storedSearches = function () {
   pastSearchesContainer.html("");
   for (let i = searches.length - 1; i >= 0; i--) {
     let btn = $("<button></button>");
+    btn.addClass("btn btn-secondary btn-lg btn-block border border-dark"); //gave style using bootstrap to my buttons
     btn.attr("type", "button");
     btn.text(searches[i]);
     btn.on("click", function () {
@@ -128,7 +129,6 @@ let storedSearches = function () {
     });
     pastSearchesContainer.append(btn);
   }
-  //where should this function be called from???
 };
 
 storedSearches();
@@ -139,16 +139,3 @@ userFormEl.on("submit", function (event) {
   var cityItem = cityInputEl.val();
   handleFormSubmit(cityItem);
 });
-
-//TODO:
-//FIGURE OUT how to call most recent stored city from local storage and how to display them on to a button
-//THEN add a on click event to each button that replaces the info for the forecast and current day cards accordingly
-
-//Questions
-//1. How Do I set the latest user search to local storage and how do
-// 1. how do I get a new button to formulate with every new search that contains the latest city search ran??
-//2. Once I do that can I just attached the event handler created that formulates the current and forecast cards to each button created so that it can replace the info accordingly?
-
-//create everything in one function
-//I can create my elements and cards for my forecast in my last then call in my fetch
-//look at mini project solution
